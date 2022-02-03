@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { getWeatherByCityId, getWeatherByCityName } from '../services/services';
+import Weather from '../components/Weather';
+import WeatherNextDays from '../components/WeatherNextDays';
 
 const Detail = ({ route, navigation }) => {
   const city = route.params.city;
@@ -17,28 +19,20 @@ const Detail = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>I am a detail</Text>
-      <Text>{city}</Text>
       {/* Check if we have weather information  */}
       {loaded && weatherDetail && (
-        <View>
-          <Text>City: {weatherDetail.name}</Text>
-          <Text>Temp: {weatherDetail.main.temp}</Text>
-          <Text>Temp Max: {weatherDetail.main.temp_max}</Text>
-          <Text>Temp Min: {weatherDetail.main.temp_min}</Text>
-          <Text>Humidity: {weatherDetail.main.humidity}</Text>
-          <Text>Pressure: {weatherDetail.main.pressure}</Text>
-          <Text>Feels: {weatherDetail.main.feels_like}</Text>
-          {/* Iterate over weather details */}
-          {weatherDetail.weather.map(info => {
-            return (
-              <View key={info.id}>
-                <Text>Main: {info.main}</Text>
-                <Text>Description: {info.description}</Text>
-              </View>
-            );
-          })}
-        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Weather navigation={navigation} weatherDetail={weatherDetail} />
+          <Text style={styles.title}>Next 5 days</Text>
+          <WeatherNextDays
+            navigation={navigation}
+            weatherDetail={weatherDetail}
+          />
+          <WeatherNextDays
+            navigation={navigation}
+            weatherDetail={weatherDetail}
+          />
+        </ScrollView>
       )}
     </View>
   );
@@ -47,8 +41,12 @@ const Detail = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    margin: 36,
+    justifyContent: 'flex-start',
+  },
+  title: {
+    fontSize: 32,
+    margin: 10,
   },
 });
 
