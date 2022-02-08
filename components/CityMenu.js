@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const data = [
   { label: 'Buenos Aires', value: 'Buenos Aires' },
@@ -13,40 +13,24 @@ const data = [
 
 const CityMenu = ({ navigation }) => {
   const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
-
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return <Text style={[styles.label, isFocus && { color: 'blue' }]}></Text>;
-    }
-    return null;
-  };
 
   return (
     <View style={styles.container}>
-      {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
+        style={[styles.dropdown]}
         data={data}
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={!isFocus ? 'Select city' : '...'}
+        placeholder={'Select a city'}
         value={value}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
         onChange={item => {
-          setIsFocus(false);
           navigation.navigate('Detail', { city: item.value });
         }}
         renderLeftIcon={() => (
-          <MaterialIcons
+          <MaterialCommunityIcons
             style={styles.icon}
-            color={isFocus ? 'blue' : 'black'}
+            color={'black'}
             name="city"
             size={20}
           />
@@ -59,18 +43,8 @@ const CityMenu = ({ navigation }) => {
 export default CityMenu;
 
 const styles = StyleSheet.create({
-  logo: {
-    width: 70,
-    height: 60,
-    padding: 10,
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'whitesmoke',
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -86,28 +60,5 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
-  },
-  label: {
-    position: 'absolute',
-    backgroundColor: 'white',
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
   },
 });

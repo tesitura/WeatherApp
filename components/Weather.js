@@ -25,6 +25,15 @@ class Weather extends PureComponent {
       '11d': require('../assets/images/weather-icons/11d.png'),
       '13d': require('../assets/images/weather-icons/13d.png'),
       '50d': require('../assets/images/weather-icons/50d.png'),
+      '01n': require('../assets/images/weather-icons/01d.png'),
+      '02n': require('../assets/images/weather-icons/02d.png'),
+      '03n': require('../assets/images/weather-icons/03d.png'),
+      '04n': require('../assets/images/weather-icons/04d.png'),
+      '09n': require('../assets/images/weather-icons/09d.png'),
+      '10n': require('../assets/images/weather-icons/10d.png'),
+      '11n': require('../assets/images/weather-icons/11d.png'),
+      '13n': require('../assets/images/weather-icons/13d.png'),
+      '50n': require('../assets/images/weather-icons/50d.png'),
     };
 
     return (
@@ -97,6 +106,7 @@ const styles = StyleSheet.create({
   description: {
     backgroundColor: 'cornsilk',
     justifyContent: 'space-around',
+    alignItems: 'center',
   },
   descriptionText: {
     fontSize: 20,
