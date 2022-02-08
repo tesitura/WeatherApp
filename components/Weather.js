@@ -40,7 +40,13 @@ class Weather extends PureComponent {
       <Grid>
         <Row size={1} style={styles.row}>
           <Text style={styles.day}>
-            {convertDate(weatherDetail.list[consecutiveDays[day]].dt)}
+            {isToday ? (
+              <Text style={styles.day}>Today</Text>
+            ) : (
+              <Text style={styles.day}>
+                {convertDate(weatherDetail.list[consecutiveDays[day]].dt)}
+              </Text>
+            )}
           </Text>
         </Row>
         <Row size={1} style={[styles.temperature, styles.row]}>
