@@ -30,7 +30,7 @@ class Weather extends PureComponent {
     return (
       <Grid>
         <Row size={1} style={styles.row}>
-          <Text style={styles.title}>
+          <Text style={styles.day}>
             {convertDate(weatherDetail.list[consecutiveDays[day]].dt)}
           </Text>
         </Row>
@@ -72,7 +72,13 @@ class Weather extends PureComponent {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 22,
+    fontSize: 32,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold',
+  },
+  day: {
+    fontSize: 20,
     textAlign: 'center',
     textAlignVertical: 'center',
     fontWeight: 'bold',

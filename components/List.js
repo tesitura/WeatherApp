@@ -27,7 +27,7 @@ class List extends PureComponent {
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 75,
+    marginTop: 15,
   },
   text: {
     fontSize: 20,
