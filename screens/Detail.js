@@ -5,6 +5,7 @@ import {
   getWeatherByCityName,
 } from '../services/services';
 import Weather from '../components/Weather';
+import CityMenu from '../components/CityMenu';
 
 const Detail = ({ route, navigation }) => {
   const city = route.params.city;
@@ -26,6 +27,7 @@ const Detail = ({ route, navigation }) => {
       {/* Check if we have weather information  */}
       {loaded && weatherDetail && (
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.title}>{city}</Text>
           <Weather
             navigation={navigation}
             weatherDetail={weatherDetail}
@@ -54,12 +56,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 16,
-    paddingTop: 40,
     justifyContent: 'flex-start',
   },
   title: {
     fontSize: 32,
-    margin: 10,
+    margin: 5,
   },
 });
 
