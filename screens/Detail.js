@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import {
   getWeatherEvery3HoursByCityName,
@@ -48,6 +54,11 @@ const Detail = ({ route, navigation }) => {
           })}
         </ScrollView>
       )}
+      {!loaded && (
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color="grey" />
+        </View>
+      )}
     </View>
   );
 };
@@ -61,6 +72,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     margin: 5,
+  },
+  activity: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 
