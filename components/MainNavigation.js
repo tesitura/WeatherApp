@@ -10,10 +10,11 @@ class MainNavigation extends PureComponent {
     return (
       <Stack.Navigator headerMode={'screen'}>
         <Stack.Screen
-          name="Consulta del clima"
+          name="Home"
           component={Home}
           options={{
             headerTransparent: true,
+            title: 'Weather App',
           }}
         />
         <Stack.Screen
@@ -21,6 +22,7 @@ class MainNavigation extends PureComponent {
           component={Detail}
           options={{
             headerTransparent: true,
+            title: 'Detalles del clima',
           }}
         />
       </Stack.Navigator>

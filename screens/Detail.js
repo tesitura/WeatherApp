@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { getWeatherByCityId, getWeatherByCityName } from '../services/services';
+import {
+  getWeatherEvery3HoursByCityName,
+  getWeatherByCityName,
+} from '../services/services';
 import Weather from '../components/Weather';
-import WeatherNextDays from '../components/WeatherNextDays';
 
 const Detail = ({ route, navigation }) => {
   const city = route.params.city;
@@ -11,27 +13,37 @@ const Detail = ({ route, navigation }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    getWeatherByCityName(city).then(weatherData => {
+    getWeatherEvery3HoursByCityName(city).then(weatherData => {
       setWeatherDetail(weatherData);
       setLoaded(true);
     });
   }, []);
+
+  const followingDays = ['1', '2', '3', '4', '5'];
 
   return (
     <View style={styles.container}>
       {/* Check if we have weather information  */}
       {loaded && weatherDetail && (
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Weather navigation={navigation} weatherDetail={weatherDetail} />
+          <Weather
+            navigation={navigation}
+            weatherDetail={weatherDetail}
+            isToday={true}
+            day="0"
+          />
           <Text style={styles.title}>Next 5 days</Text>
-          <WeatherNextDays
-            navigation={navigation}
-            weatherDetail={weatherDetail}
-          />
-          <WeatherNextDays
-            navigation={navigation}
-            weatherDetail={weatherDetail}
-          />
+          {followingDays.map(day => {
+            return (
+              <Weather
+                navigation={navigation}
+                weatherDetail={weatherDetail}
+                isToday={false}
+                day={day}
+                key={day}
+              />
+            );
+          })}
         </ScrollView>
       )}
     </View>
@@ -41,7 +53,8 @@ const Detail = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 36,
+    margin: 16,
+    paddingTop: 40,
     justifyContent: 'flex-start',
   },
   title: {

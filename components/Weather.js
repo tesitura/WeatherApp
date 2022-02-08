@@ -1,10 +1,19 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React, { PureComponent } from 'react';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import dateFormat from 'dateformat';
+
+// Converts Unix UTC format date to a valid Date for processing
+const convertDate = unixUtcFormat => {
+  return dateFormat(new Date(unixUtcFormat * 1000), 'dddd, dS mmmm');
+};
+
+// Calculate following 5 days on 3 hours bands
+const consecutiveDays = [0, 8, 16, 24, 32, 39];
 
 class Weather extends PureComponent {
   render() {
-    const { navigation, weatherDetail } = this.props;
+    const { navigation, weatherDetail, day, isToday } = this.props;
 
     const weatherImages = {
       '01d': require('../assets/images/weather-icons/01d.png'),
@@ -21,34 +30,41 @@ class Weather extends PureComponent {
     return (
       <Grid>
         <Row size={1} style={styles.row}>
-          <Text style={styles.title}>{weatherDetail.name}</Text>
+          <Text style={styles.title}>
+            {convertDate(weatherDetail.list[consecutiveDays[day]].dt)}
+          </Text>
         </Row>
         <Row size={1} style={[styles.temperature, styles.row]}>
           <Text style={styles.temperatureNum}>
-            {Math.round(weatherDetail.main.temp)}º
+            {Math.round(weatherDetail.list[consecutiveDays[day]].main.temp)}º
           </Text>
-
-          {weatherDetail.weather.map(info => {
-            return (
-              <View key={info.id} style={styles.description}>
-                <Image source={weatherImages[info.icon]} />
-                <Text style={styles.descriptionText}>{info.description}</Text>
-              </View>
-            );
-          })}
+          <View style={styles.description}>
+            <Image
+              source={
+                weatherImages[
+                  weatherDetail.list[consecutiveDays[day]].weather[0].icon
+                ]
+              }
+            />
+            <Text style={styles.descriptionText}>
+              {weatherDetail.list[consecutiveDays[day]].weather[0].description}
+            </Text>
+          </View>
         </Row>
         <Row size={1} style={styles.row}>
           <Text style={styles.temperatureMaxMin}>
-            Max: {weatherDetail.main.temp_max}
-            {'\n'}Min: {weatherDetail.main.temp_min}
+            Max: {weatherDetail.list[consecutiveDays[day]].main.temp_max}
+            {'\n'}Min: {weatherDetail.list[consecutiveDays[day]].main.temp_min}
           </Text>
         </Row>
-        <Row size={1} style={styles.row}>
-          <Text style={styles.temperatureMaxMin}>
-            Humidity: {weatherDetail.main.humidity}%{'\n'}Pressure:{' '}
-            {weatherDetail.main.pressure} Pa
-          </Text>
-        </Row>
+        {isToday && (
+          <Row size={1} style={styles.row}>
+            <Text style={styles.temperatureMaxMin}>
+              Humidity: {weatherDetail.list[0].main.humidity}%{'\n'}Pressure:{' '}
+              {weatherDetail.list[0].main.pressure} Pa
+            </Text>
+          </Row>
+        )}
       </Grid>
     );
   }
@@ -59,12 +75,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     textAlignVertical: 'center',
+    fontWeight: 'bold',
   },
   temperature: {
     backgroundColor: 'red',
     flex: 1,
     justifyContent: 'space-between',
-    padding: 10,
+    paddingLeft: 20,
   },
   temperatureNum: {
     fontSize: 42,
@@ -81,6 +98,11 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   temperatureMaxMin: { fontSize: 20 },
-  row: { backgroundColor: 'linen', borderRadius: 7, padding: 5 },
+  row: {
+    backgroundColor: 'linen',
+    borderRadius: 7,
+    padding: 5,
+    paddingLeft: 15,
+  },
 });
 export default Weather;
