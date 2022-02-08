@@ -7,11 +7,11 @@ class Card extends PureComponent {
     console.log(city);
 
     const images = {
-      'Buenos Aires': require('../assets/images/buenos-aires.png'),
-      'Rio de Janeiro': require('../assets/images/buenos-aires.png'),
-      Caracas: require('../assets/images/montevideo.png'),
-      Lima: require('../assets/images/montevideo.png'),
-      Santiago: require('../assets/images/montevideo.png'),
+      'Buenos Aires': require('../assets/images/cities/buenos-aires.png'),
+      'Rio de Janeiro': require('../assets/images/cities/rio-de-janeiro.png'),
+      Caracas: require('../assets/images/cities/caracas.png'),
+      Lima: require('../assets/images/cities/lima.png'),
+      Santiago: require('../assets/images/cities/santiago.png'),
     };
     const cityImage = images[city];
 
