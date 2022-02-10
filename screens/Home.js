@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Card from '../components/Card';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import CityMenu from '../components/CityMenu';
 import List from '../components/List';
 

@@ -1,6 +1,7 @@
-import React, { PureComponent, useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React, { PureComponent } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 import Card from '../components/Card';
+import { Text } from 'react-native-paper';
 
 class List extends PureComponent {
   render() {

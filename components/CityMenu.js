@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
