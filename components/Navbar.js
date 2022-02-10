@@ -1,6 +1,6 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React, { PureComponent, useState } from 'react';
-import { Dropdown } from 'react-native-element-dropdown';
+import { Image, StyleSheet, View } from 'react-native';
+import React, { PureComponent } from 'react';
+import { Text } from 'react-native-paper';
 
 const data = [
   { label: 'Bs As', value: 'Buenos Aires' },

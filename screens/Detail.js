@@ -1,17 +1,11 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  ActivityIndicator,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { Headline, Subheading } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
 import {
   getWeatherEvery3HoursByCityName,
   getWeatherByCityName,
 } from '../services/services';
 import Weather from '../components/Weather';
-import CityMenu from '../components/CityMenu';
 
 const Detail = ({ route, navigation }) => {
   const city = route.params.city;
@@ -33,14 +27,14 @@ const Detail = ({ route, navigation }) => {
       {/* Check if we have weather information  */}
       {loaded && weatherDetail && (
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={styles.title}>{city}</Text>
+          <Headline style={styles.title}>{city}</Headline>
           <Weather
             navigation={navigation}
             weatherDetail={weatherDetail}
             isToday={true}
             day="0"
           />
-          <Text style={styles.title}>Next 5 days</Text>
+          <Subheading style={styles.title}>Next 5 days</Subheading>
           {followingDays.map(day => {
             return (
               <Weather
@@ -71,6 +65,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    paddingTop: 15,
     margin: 5,
   },
   activity: {

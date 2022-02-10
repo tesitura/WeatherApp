@@ -1,7 +1,8 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import React, { PureComponent } from 'react';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Row, Grid } from 'react-native-easy-grid';
 import dateFormat from 'dateformat';
+import { Divider, Text } from 'react-native-paper';
 
 // Converts Unix UTC format date to a valid Date for processing
 const convertDate = unixUtcFormat => {
@@ -37,50 +38,57 @@ class Weather extends PureComponent {
     };
 
     return (
-      <Grid>
-        <Row size={1} style={styles.row}>
-          <Text style={styles.day}>
-            {isToday ? (
-              <Text style={styles.day}>Today</Text>
-            ) : (
-              <Text style={styles.day}>
-                {convertDate(weatherDetail.list[consecutiveDays[day]].dt)}
-              </Text>
-            )}
-          </Text>
-        </Row>
-        <Row size={1} style={[styles.temperature, styles.row]}>
-          <Text style={styles.temperatureNum}>
-            {Math.round(weatherDetail.list[consecutiveDays[day]].main.temp)}º
-          </Text>
-          <View style={styles.description}>
-            <Image
-              source={
-                weatherImages[
-                  weatherDetail.list[consecutiveDays[day]].weather[0].icon
-                ]
-              }
-            />
-            <Text style={styles.descriptionText}>
-              {weatherDetail.list[consecutiveDays[day]].weather[0].description}
-            </Text>
-          </View>
-        </Row>
-        <Row size={1} style={styles.row}>
-          <Text style={styles.temperatureMaxMin}>
-            Max: {weatherDetail.list[consecutiveDays[day]].main.temp_max}
-            {'\n'}Min: {weatherDetail.list[consecutiveDays[day]].main.temp_min}
-          </Text>
-        </Row>
-        {isToday && (
+      <View>
+        <Grid>
           <Row size={1} style={styles.row}>
-            <Text style={styles.temperatureMaxMin}>
-              Humidity: {weatherDetail.list[0].main.humidity}%{'\n'}Pressure:{' '}
-              {weatherDetail.list[0].main.pressure} Pa
+            <Text style={styles.day}>
+              {isToday ? (
+                <Text style={styles.day}>Today</Text>
+              ) : (
+                <Text style={styles.day}>
+                  {convertDate(weatherDetail.list[consecutiveDays[day]].dt)}
+                </Text>
+              )}
             </Text>
           </Row>
-        )}
-      </Grid>
+          <Row size={1} style={[styles.temperature, styles.row]}>
+            <Text style={styles.temperatureNum}>
+              {Math.round(weatherDetail.list[consecutiveDays[day]].main.temp)}º
+            </Text>
+            <View style={styles.description}>
+              <Image
+                source={
+                  weatherImages[
+                    weatherDetail.list[consecutiveDays[day]].weather[0].icon
+                  ]
+                }
+              />
+              <Text style={styles.descriptionText}>
+                {
+                  weatherDetail.list[consecutiveDays[day]].weather[0]
+                    .description
+                }
+              </Text>
+            </View>
+          </Row>
+          <Row size={1} style={styles.row}>
+            <Text style={styles.temperatureMaxMin}>
+              Max: {weatherDetail.list[consecutiveDays[day]].main.temp_max}
+              {'\n'}Min:{' '}
+              {weatherDetail.list[consecutiveDays[day]].main.temp_min}
+            </Text>
+          </Row>
+          {isToday && (
+            <Row size={1} style={styles.row}>
+              <Text style={styles.temperatureMaxMin}>
+                Humidity: {weatherDetail.list[0].main.humidity}%{'\n'}Pressure:{' '}
+                {weatherDetail.list[0].main.pressure} Pa
+              </Text>
+            </Row>
+          )}
+        </Grid>
+        <Divider />
+      </View>
     );
   }
 }
@@ -113,6 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'cornsilk',
     justifyContent: 'space-around',
     alignItems: 'center',
+    borderRadius: 20,
   },
   descriptionText: {
     fontSize: 20,
