@@ -2,14 +2,6 @@ import { Image, StyleSheet, View } from 'react-native';
 import React, { PureComponent } from 'react';
 import { Text } from 'react-native-paper';
 
-const data = [
-  { label: 'Bs As', value: 'Buenos Aires' },
-  { label: 'Rio', value: 'Rio de Janeiro' },
-  { label: 'Lima', value: 'Lima' },
-  { label: 'Caracas', value: 'Caracas' },
-  { label: 'Santiago', value: 'Santiago' },
-];
-
 class Navbar extends PureComponent {
   render() {
     const { navigation, main } = this.props;

@@ -1,10 +1,7 @@
 import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Headline, Subheading } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
-import {
-  getWeatherEvery3HoursByCityName,
-  getWeatherByCityName,
-} from '../services/services';
+import { getWeatherEvery3HoursByCityName } from '../services/services';
 import Weather from '../components/Weather';
 
 const Detail = ({ route, navigation }) => {

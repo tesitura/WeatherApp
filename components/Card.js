@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 class Card extends PureComponent {
   render() {
     const { navigation, city } = this.props;
-    console.log(city);
 
     const images = {
       'Buenos Aires': require('../assets/images/cities/buenos-aires.png'),
@@ -36,12 +35,6 @@ const styles = StyleSheet.create({
     height: 200,
     width: 120,
     borderRadius: 20,
-  },
-  cityName: {
-    position: 'absolute',
-    width: 100,
-    textAlign: 'center',
-    top: 10,
   },
 });
 

@@ -6,7 +6,6 @@ import { Text } from 'react-native-paper';
 class List extends PureComponent {
   render() {
     const { navigation, title, content } = this.props;
-    console.log(content);
     return (
       <View style={styles.list}>
         <View>

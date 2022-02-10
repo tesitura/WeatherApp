@@ -4,10 +4,10 @@ import Home from '../screens/Home';
 import Detail from '../screens/Detail';
 import Navbar from './Navbar';
 
-const Stack = createNativeStackNavigator();
-
 class MainNavigation extends PureComponent {
   render() {
+    const Stack = createNativeStackNavigator();
+
     return (
       <Stack.Navigator headerMode={'screen'}>
         <Stack.Screen
